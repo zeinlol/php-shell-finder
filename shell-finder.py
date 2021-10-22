@@ -17,36 +17,36 @@
 #########################################################################################################
 
 import os
+import argparse
 
+from classes import ColorCode, FakeColorCode
 
-class ColorCode:
-    PURPLE = '\033[95m'
-    CYAN = '\033[96m'
-    DARKCYAN = '\033[36m'
-    BLUE = '\033[94m'
-    GREEN = '\033[92m'
-    YELLOW = '\033[93m'
-    RED = '\033[91m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
-    END = '\033[0m'
+parser = argparse.ArgumentParser(description='Tool for finding possible shells.')
+parser.add_argument('--no-color', type=bool, default=False,
+                    help='Print text with colors. Default is False.')
 
+args = parser.parse_args()
 
-logo = f"{ColorCode.BLUE} __ _          _ _     ___ _           _{ColorCode.END}\n" \
-       f"{ColorCode.BLUE}/ _\ |__   ___| | |   / __( )_ __   __| | ___ _ __{ColorCode.END}\n" \
-       f"{ColorCode.BLUE}\\ \| '_ \ / _ \ | |  / _\ | | '_ \ / _` |/ _ \\ '__|'{ColorCode.END}\n" \
-       f"{ColorCode.BLUE}_\ \ | | |  __/ | | / /   | | | | | (_| |  __/ | {ColorCode.END}\n" \
-       f"{ColorCode.BLUE}\__/_| |_|\___|_|_| \/    |_|_| |_|\__,_|\___|_| {ColorCode.END}\n" \
-       f"{ColorCode.YELLOW}By Zeinlol forked from Blackdrake (@alvarodh5){ColorCode.END}"
+if args.no_color:
+    color = FakeColorCode
+else:
+    color = ColorCode
 
-warning = f"{ColorCode.GREEN}Make sure the files it detects are illegitimate before deleting them{ColorCode.END}" \
-          f"{ColorCode.GREEN}Keep in mind, that depending on the amount of files you have on your server, the " \
-          f"script will take more or less time{ColorCode.END}"
+logo = f"{color.BLUE} __ _          _ _     ___ _           _{color.END}\n" \
+       f"{color.BLUE}/ _\ |__   ___| | |   / __( )_ __   __| | ___ _ __{color.END}\n" \
+       f"{color.BLUE}\\ \| '_ \ / _ \ | |  / _\ | | '_ \ / _` |/ _ \\ '__|'{color.END}\n" \
+       f"{color.BLUE}_\ \ | | |  __/ | | / /   | | | | | (_| |  __/ | {color.END}\n" \
+       f"{color.BLUE}\__/_| |_|\___|_|_| \/    |_|_| |_|\__,_|\___|_| {color.END}\n" \
+       f"{color.YELLOW}By Zeinlol forked from Blackdrake (@alvarodh5){color.END}"
+
+warning = f"{color.GREEN}Make sure the files it detects are illegitimate before deleting them{color.END}" \
+          f"{color.GREEN}Keep in mind, that depending on the amount of files you have on your server, the " \
+          f"script will take more or less time{color.END}"
 
 
 def get_target() -> str:
-    target = input(f"{ColorCode.GREEN}Enter the path of the directory where you host your files "
-                   f"(Press Enter to use /var/www/ by default):{ColorCode.END}")
+    target = input(f"{color.GREEN}Enter the path of the directory where you host your files "
+                   f"(Press Enter to use /var/www/ by default):{color.END}")
     if target == "":
         target = "/var/www/"
     elif target[-1:] != "/":
@@ -83,7 +83,7 @@ def look_for_shells(target_folder: str):
     os.system('find ' + target_folder + ' -name "*".php  -type f -print0  | xargs -0 grep SE3lRVER | uniq -c  |'
                                         ' sort -u  | cut -d":" -f1  | awk \'{print "Possible WEEVELY SHELL [PHP]'
                                         ' --> rm -rf " $2}\' | uniq')
-    print(f"{ColorCode.END}{ColorCode.BLUE}Other possible Shell cases:{ColorCode.END}{ColorCode.YELLOW}")
+    print(f"{color.END}{color.BLUE}Other possible Shell cases:{color.END}{color.YELLOW}")
     os.system('find ' + target_folder + ' -name "*".php  -type f -print0  | xargs -0 grep shell | uniq -c  |'
                                         ' sort -u  | cut -d":" -f1  | awk \'{print "Possible Shell [PHP]'
                                         ' --> rm -rf " $2}\' | uniq')
@@ -129,9 +129,9 @@ def main():
     print(logo)
     print(warning)
     target = get_target()
-    print(f'{ColorCode.BLUE}Start looking for known Shells...{ColorCode.END}{ColorCode.RED}')
+    print(f'{color.BLUE}Start looking for known Shells...{color.END}{color.RED}')
     look_for_shells(target)
-    print(f'{ColorCode.END}{ColorCode.GREEN}Scanner finished, follow us! @underc0de @alvarodh5 @zeinlol{ColorCode.END}')
+    print(f'{color.END}{color.GREEN}Scanner finished, follow us! @underc0de @alvarodh5 @zeinlol{color.END}')
 
 
 if __name__ == "__main__":
