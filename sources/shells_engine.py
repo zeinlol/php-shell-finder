@@ -7,23 +7,23 @@ def look_for_shells(target_folder: str) -> list[str]:
     found_data = []
     # [ KNOWN ISSUES ] - [BEGIN]
     known_shells = [
-        ["R57 Shell [PHP]: ",
+        ["R57 Shell in PHP file: ",
          f'find {target_folder} -name "*".php -type f -print0 | xargs -0 grep -n r57 | sort -u | uniq'],
-        ["R57 Shell [TXT]: ",
+        ["R57 Shell in TXT file: ",
          f'find {target_folder} -name "*".txt -type f -print0 | xargs -0 grep -n r57 | sort -u | uniq'],
-        ["C99 Shell [PHP]: ",
+        ["C99 Shell in PHP file: ",
          f'find {target_folder} -name "*".php -type f -print0 | xargs -0 grep -n c99 | sort -u | uniq'],
-        ["C99 Shell [TXT]: ",
+        ["C99 Shell in TXT file: ",
          f'find {target_folder} -name "*".txt -type f -print0 | xargs -0 grep -n c99 | sort -u | uniq'],
-        ["WEEVELY SHELL [PHP]: ",
+        ["WEEVELY SHELL in PHP file: ",
          f'find {target_folder} -name "*".php -type f -print0 | xargs -0 grep -n SE3lRVER | sort -u | uniq'],
-        ["C98 [TXT]: ",
+        ["C98 Shell in TXT file: ",
          f'find {target_folder} -name "*".txt -type f -print0 | xargs -0 grep -n c98 | sort -u | uniq'],
-        ["C98 [PHP]: ",
+        ["C98 Shell in PHP file: ",
          f'find {target_folder} -name "*".php -type f -print0 | xargs -0 grep -n c98 | sort -u | uniq'],
-        ["C100 [TXT]: ",
+        ["C100 in TXT file: ",
          f'find {target_folder} -name "*".txt -type f -print0 | xargs -0 grep -n c100 | sort -u | uniq'],
-        ["C100 [PHP]: ",
+        ["C100 Shell in PHP file: ",
          f'find {target_folder} -name "*".php -type f -print0 | xargs -0 grep -n c100 | sort -u | uniq'],
     ]
     for command in known_shells:
