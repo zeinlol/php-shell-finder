@@ -23,13 +23,13 @@ from sources.text_variables import logo, warning, start_scan, scan_finished
 
 
 def main():
-    if args.clean_output:
+    if not args.clean_output and not args.json:
         print(logo)
         print(warning)
 
     target = get_target(args.target)
 
-    if args.clean_output:
+    if not args.clean_output and not args.json:
         print(start_scan)
     shells = look_for_shells(target)
     if args.json:
@@ -37,7 +37,7 @@ def main():
     else:
         print_found_data(shells)
 
-    if args.clean_output:
+    if not args.clean_output and not args.json:
         print(scan_finished)
 
 
