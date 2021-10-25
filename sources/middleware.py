@@ -1,5 +1,7 @@
 import json
+from typing import Union
 
+from .arguments import args
 from .text_variables import get_target_text, color
 
 
@@ -50,3 +52,15 @@ def convert_data_to_dict(shells: list[str]) -> list[dict]:
 def print_data_as_json(shells: list[str]) -> None:
     shells = convert_data_to_dict(shells)
     print(json.dumps(shells))
+
+
+def print_data_to_file(data: Union[list[str], list[dict]], output_file: str) -> None:
+
+    with open(output_file, 'w') as file:
+        if args.json:
+            data = convert_data_to_dict(data)
+            json.dump(data, file, indent=2)
+        else:
+            data = '\n'.join(data)
+            file.write(str(data))
+        file.close()

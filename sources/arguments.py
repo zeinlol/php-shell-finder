@@ -11,6 +11,6 @@ parser.add_argument('-t', '--target', default='',
 parser.add_argument('--json', default=False, action='store_const', const=True,
                     help='Print output as json')
 parser.add_argument('-o', '--output', default='',
-                    help='Print output to OUTPUT file')
+                    help='Print found data to OUTPUT file')
 
 args = parser.parse_args()
