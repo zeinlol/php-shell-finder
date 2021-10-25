@@ -18,6 +18,7 @@ git clone https://github.com/zeinlol/php-shell-finder
 ## Run
 ```angular2html
 python3 shell-finder.py [-h] [--no-color] [--clean-output] [-t TARGET] [--json]
+                        [-o OUTPUT]
 
 Tool for finding possible shells.
 
