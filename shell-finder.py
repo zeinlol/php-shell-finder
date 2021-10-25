@@ -17,41 +17,17 @@
 #########################################################################################################
 
 import os
-import argparse
-
-from classes import ColorCode, FakeColorCode
-
-parser = argparse.ArgumentParser(description='Tool for finding possible shells.')
-parser.add_argument('--no-color', type=bool, default=False,
-                    help='Print text with colors. Default is False.')
-
-args = parser.parse_args()
-
-if args.no_color:
-    color = FakeColorCode
-else:
-    color = ColorCode
-
-logo = f"{color.BLUE} __ _          _ _     ___ _           _{color.END}\n" \
-       f"{color.BLUE}/ _\ |__   ___| | |   / __( )_ __   __| | ___ _ __{color.END}\n" \
-       f"{color.BLUE}\\ \| '_ \ / _ \ | |  / _\ | | '_ \ / _` |/ _ \\ '__|'{color.END}\n" \
-       f"{color.BLUE}_\ \ | | |  __/ | | / /   | | | | | (_| |  __/ | {color.END}\n" \
-       f"{color.BLUE}\__/_| |_|\___|_|_| \/    |_|_| |_|\__,_|\___|_| {color.END}\n" \
-       f"{color.YELLOW}By Zeinlol forked from Blackdrake (@alvarodh5){color.END}"
-
-warning = f"{color.GREEN}Make sure the files it detects are illegitimate before deleting them{color.END}" \
-          f"{color.GREEN}Keep in mind, that depending on the amount of files you have on your server, the " \
-          f"script will take more or less time{color.END}"
+from text_variables import logo, warning, start_scan, scan_finished, other_findings, get_target_text, args
 
 
-def get_target() -> str:
-    target = input(f"{color.GREEN}Enter the path of the directory where you host your files "
-                   f"(Press Enter to use /var/www/ by default):{color.END}")
+def get_target(target: str) -> str:
+    if target == '':
+        target = input(get_target_text)
     if target == "":
         target = "/var/www/"
-    elif target[-1:] != "/":
+    if target[-1:] != "/":
         target += "/"
-    print(f'{target=}')
+    # print(f'{target=}')
     return target
 
 
@@ -119,6 +95,10 @@ def look_for_shells(target_folder: str):
     os.system('find ' + target_folder + ' -name "*".php  -type f -print0  | xargs -0 grep system | uniq -c  |'
                                         ' sort -u  | cut -d":" -f1  | awk \'{print "Possible Shell [PHP]'
                                         ' --> rm -rf " $2}\' | uniq')
+    # [ KNOWN ISSUES ] - [END]
+
+    if args.clean_output:
+        print(other_findings)
 
     os.system('find ' + target_folder + ' -name "*".php  -type f -print0  | xargs -0 grep milw0rm | uniq -c  |'
                                         ' sort -u  | cut -d":" -f1  | awk \'{print "Possible Shell [PHP]'
@@ -126,12 +106,18 @@ def look_for_shells(target_folder: str):
 
 
 def main():
-    print(logo)
-    print(warning)
-    target = get_target()
-    print(f'{color.BLUE}Start looking for known Shells...{color.END}{color.RED}')
+    if args.clean_output:
+        print(logo)
+        print(warning)
+
+    target = get_target(args.target)
+
+    if args.clean_output:
+        print(start_scan)
     look_for_shells(target)
-    print(f'{color.END}{color.GREEN}Scanner finished, follow us! @underc0de @alvarodh5 @zeinlol{color.END}')
+
+    if args.clean_output:
+        print(scan_finished)
 
 
 if __name__ == "__main__":
