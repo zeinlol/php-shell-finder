@@ -16,10 +16,10 @@
 #                                           Run this tool as root                                       #
 #########################################################################################################
 
-from arguments import args
-from middleware import get_target, print_found_data
-from shells_engine import look_for_shells
-from text_variables import logo, warning, start_scan, scan_finished
+from sources.arguments import args
+from sources.middleware import get_target, print_found_data
+from sources.shells_engine import look_for_shells
+from sources.text_variables import logo, warning, start_scan, scan_finished
 
 
 def main():

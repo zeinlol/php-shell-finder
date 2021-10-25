@@ -15,5 +15,3 @@ start_scan = f'{color.BLUE}Start looking for known Shells...{color.END}'
 scan_finished = f'{color.GREEN}Scanner finished, follow us! @underc0de @alvarodh5 @zeinlol{color.END}'
 get_target_text = f"{color.GREEN}Enter the path of the directory where you host your files " \
                   f"(Press Enter to use /var/www/ by default):{color.END}"
-
-
