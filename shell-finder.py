@@ -17,7 +17,7 @@
 #########################################################################################################
 
 from sources.arguments import args
-from sources.middleware import get_target, print_found_data
+from sources.middleware import get_target, print_found_data, print_data_as_json
 from sources.shells_engine import look_for_shells
 from sources.text_variables import logo, warning, start_scan, scan_finished
 
@@ -33,7 +33,7 @@ def main():
         print(start_scan)
     shells = look_for_shells(target)
     if args.json:
-        ...
+        print_data_as_json(shells)
     else:
         print_found_data(shells)
 

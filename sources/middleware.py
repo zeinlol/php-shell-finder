@@ -1,4 +1,4 @@
-from text_variables import get_target_text, color
+from .text_variables import get_target_text, color
 
 
 def get_target(target: str) -> str:
@@ -23,3 +23,15 @@ def print_found_data(shells: list[str]) -> None:
         else:
             shell = color.RED + shell + color.END
         print(shell)
+
+
+def convert_data_to_json(shells: list[str]) -> dict:
+    for shell in shells:
+        print(shell)
+
+    return {}
+
+
+def print_data_as_json(shells: list[str]) -> None:
+    shells = convert_data_to_json(shells)
+    print(shells)
