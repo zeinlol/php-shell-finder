@@ -1,6 +1,6 @@
 import os
 
-from .middleware import split_lists
+from middleware import split_lists
 
 
 def look_for_shells(target_folder: str) -> list[str]:
