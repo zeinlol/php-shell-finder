@@ -1,8 +1,8 @@
 import json
 from typing import Union
 
-from .arguments import args
-from .text_variables import get_target_text, color
+from arguments import args
+from text_variables import get_target_text, color
 
 
 def get_target(target: str) -> str:
