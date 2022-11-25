@@ -1,18 +1,18 @@
 import json
 from typing import Union
 
-from arguments import args
-from text_variables import get_target_text, color
+from sources.arguments import args
+from sources.text_variables import get_target_text, color
 
 
 def get_target(target: str) -> str:
-    if target == '':
+    if not target:
         target = input(get_target_text)
     if target == "":
         target = "/var/www/"
     if target[-1:] != "/":
         target += "/"
-    # print(f'{target=}')
+    print(f'{target=}')
     return target
 
 

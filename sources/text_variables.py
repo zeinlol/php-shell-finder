@@ -1,5 +1,5 @@
-from arguments import args
-from classes import FakeColorCode, ColorCode
+from sources.arguments import args
+from sources.classes import FakeColorCode, ColorCode
 
 color = FakeColorCode if args.no_color else ColorCode
 logo = f"{color.BLUE} __ _          _ _     ___ _           _{color.END}\n" \
